@@ -10,6 +10,7 @@ gem "rspec-rails", "~> 3.7", require: false
 gem "simplecov", require: false
 gem "with_model", require: false
 gem "rails-controller-testing", require: false
+gem "lograge"
 
 # Specify your gem's dependencies in solidus_graphql.gemspec
 gemspec

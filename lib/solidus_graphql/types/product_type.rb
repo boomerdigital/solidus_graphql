@@ -12,6 +12,12 @@ module Solidus
       connection :variants, VariantType.connection_type do
         resolve VariantResolver::ByProduct
       end
+
+      connection :option_types, OptionType.connection_type do
+         resolve OptionTypeResolver::ByProduct
+      end
+
+
     end
   end
 end

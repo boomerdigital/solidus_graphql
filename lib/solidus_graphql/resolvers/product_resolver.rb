@@ -31,12 +31,21 @@ module Solidus
 
 
 
-      #
-      # class OptionValues
-      #   def self.call(product,args, tx)
-      #     product.variant_option_values_by_option_type
-      #   end
-      # end
+      class OptionValues
+        #ToDo for review
+        def self.call(product,args, tx)
+            option_types_and_values= product.variant_option_values_by_option_type
+            values=[]
+            option_types_and_values.each do |key, array|
+              array.each do |value|
+                record=OpenStruct.new(value.attributes)
+                record.type_name=key[:name]
+                values<<record
+              end
+            end
+           values
+        end
+      end
 
       class ByTaxon
         def self.call(taxon, args, ctx)

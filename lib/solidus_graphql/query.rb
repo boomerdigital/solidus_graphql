@@ -7,6 +7,7 @@ module Solidus
       field :products,   ProductsField
       field :taxons,     TaxonsField
       field :taxonomies, TaxonomiesField
+      field :option_types, OptionTypeField
     end
   end
 end

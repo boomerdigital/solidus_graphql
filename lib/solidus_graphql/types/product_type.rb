@@ -17,7 +17,9 @@ module Solidus
          resolve OptionTypeResolver::ByProduct
       end
 
-
+      connection :option_values_by_option_type, OptionValueType.connection_type do
+        resolve ProductResolver::OptionValues
+      end
     end
   end
 end

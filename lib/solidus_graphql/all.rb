@@ -20,5 +20,8 @@ require_relative "resolvers/variant_resolver"
 require_relative "types/price_type"
 require_relative "types/currency_type"
 
+require_relative "fields/option_type_field"
 require_relative "types/option_type"
 require_relative "resolvers/option_type_resolver"
+
+require_relative "types/option_value_type"

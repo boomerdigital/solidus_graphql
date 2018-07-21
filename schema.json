@@ -1,0 +1,166 @@
+type Currency {
+  iso_code: String
+  name: String
+  subunit: String
+  symbol: String
+}
+
+type Mutation {
+  helloWorld: String
+}
+
+type OptionType {
+  id: ID!
+  name: String!
+  position: Int
+  presentation: String
+}
+
+# The connection type for OptionType.
+type OptionTypeConnection {
+  # A list of edges.
+  edges: [OptionTypeEdge]
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+}
+
+# An edge in a connection.
+type OptionTypeEdge {
+  # A cursor for use in pagination.
+  cursor: String!
+
+  # The item at the end of the edge.
+  node: OptionType
+}
+
+# Information about pagination in a connection.
+type PageInfo {
+  # When paginating forwards, the cursor to continue.
+  endCursor: String
+
+  # When paginating forwards, are there more items?
+  hasNextPage: Boolean!
+
+  # When paginating backwards, are there more items?
+  hasPreviousPage: Boolean!
+
+  # When paginating backwards, the cursor to continue.
+  startCursor: String
+}
+
+type Price {
+  amount: Float
+  currency: Currency
+  subunit_amount: Int
+}
+
+type Product {
+  description: String
+  id: ID
+  master: Variant
+  name: String
+  option_types(
+    # Returns the first _n_ elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the last _n_ elements from the list.
+    last: Int
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+  ): OptionTypeConnection
+  slug: String
+  variants(
+    # Returns the first _n_ elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the last _n_ elements from the list.
+    last: Int
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+  ): VariantConnection
+}
+
+# The connection type for Product.
+type ProductConnection {
+  # A list of edges.
+  edges: [ProductEdge]
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+}
+
+# An edge in a connection.
+type ProductEdge {
+  # A cursor for use in pagination.
+  cursor: String!
+
+  # The item at the end of the edge.
+  node: Product
+}
+
+type Query {
+  # List of all products
+  products(ids: [ID] = [], slugs: String = "[]"): [Product]
+
+  # Taxon list
+  taxons(ids: [ID], page: Int, per_page: Int): [Taxon]
+}
+
+type Taxon {
+  id: ID
+  name: String
+  permalink: String
+  pretty_name: String
+  products(
+    # Returns the first _n_ elements from the list.
+    first: Int
+
+    # Returns the elements in the list that come after the specified cursor.
+    after: String
+
+    # Returns the last _n_ elements from the list.
+    last: Int
+
+    # Returns the elements in the list that come before the specified cursor.
+    before: String
+  ): ProductConnection
+  seo_title: String
+}
+
+type Variant {
+  height: String
+  id: ID
+  name: String
+  price: Price
+  product: Product
+  sku: String
+  weight: String
+}
+
+# The connection type for Variant.
+type VariantConnection {
+  # A list of edges.
+  edges: [VariantEdge]
+
+  # Information to aid in pagination.
+  pageInfo: PageInfo!
+}
+
+# An edge in a connection.
+type VariantEdge {
+  # A cursor for use in pagination.
+  cursor: String!
+
+  # The item at the end of the edge.
+  node: Variant
+}
+
